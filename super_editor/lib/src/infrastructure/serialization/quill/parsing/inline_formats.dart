@@ -100,12 +100,20 @@ class FontFamilyDeltaFormat extends FilterByNameInlineDeltaFormat {
 }
 
 /// An inline Quill Delta format that applies a named or numerical size to text.
-class SizeDeltaFormat extends FilterByNameInlineDeltaFormat {
-  static const _size = "size";
+class SizeDeltaFormat implements InlineDeltaFormat {
+  static const name = "size";
 
-  const SizeDeltaFormat() : super(_size);
+  const SizeDeltaFormat();
 
   @override
+  Attribution? from(Operation operation) {
+    if (!operation.hasAttribute(name)) {
+      return null;
+    }
+
+    return createAttribution(operation.attributes![name]);
+  }
+
   Attribution? createAttribution(Object value) {
     if (value is num) {
       final size = value.toDouble();
@@ -116,7 +124,6 @@ class SizeDeltaFormat extends FilterByNameInlineDeltaFormat {
       return NamedFontSizeAttribution(value);
     }
 
-    // TODO: log unknown size value.
     return null;
   }
 }
