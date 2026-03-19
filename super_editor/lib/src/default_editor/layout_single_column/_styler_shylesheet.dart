@@ -84,6 +84,8 @@ class SingleColumnStylesheetStyler extends SingleColumnLayoutStylePhase {
           existingStyles[entry.key] = oldValue.merge(newValue);
         } else if (oldValue is CascadingPadding && newValue is CascadingPadding) {
           existingStyles[entry.key] = newValue.applyOnTopOf(oldValue);
+        } else {
+          existingStyles[entry.key] = newValue;
         }
       } else {
         // This is a new entry, just set it.
