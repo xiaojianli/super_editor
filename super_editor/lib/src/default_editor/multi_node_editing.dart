@@ -716,7 +716,7 @@ class ReplaceNodeWithEmptyParagraphWithCaretCommand extends EditCommand {
     }
 
     final newNode = ParagraphNode(
-      id: oldNode.id,
+      id: Editor.createNodeId(),
       text: AttributedText(),
     );
     document.replaceNodeById(oldNode.id, newNode);
