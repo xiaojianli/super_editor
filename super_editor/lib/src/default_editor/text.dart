@@ -485,6 +485,9 @@ class TextNodePosition extends TextPosition implements NodePosition {
   }
 
   @override
+  String toString() => "[TextNodePosition] - ${super.toString()}";
+
+  @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       super == other && other is TextNodePosition && runtimeType == other.runtimeType && offset == other.offset;

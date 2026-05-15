@@ -270,7 +270,8 @@ class DocumentImeSerializer {
   DocumentPosition _imeToDocumentPosition(TextPosition imePosition, {required bool isUpstream}) {
     for (final range in imeRangesToDocTextNodes.keys) {
       if (range.start <= imePosition.offset && imePosition.offset <= range.end) {
-        final node = _doc.getNodeById(imeRangesToDocTextNodes[range]!)!;
+        String nodeId = imeRangesToDocTextNodes[range]!;
+        final node = _doc.getNodeById(nodeId)!;
 
         if (node is TextNode) {
           return DocumentPosition(
