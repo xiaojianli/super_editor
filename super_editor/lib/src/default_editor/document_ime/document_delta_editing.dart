@@ -321,7 +321,12 @@ class TextDeltasDocumentEditor {
     editorImeLog.fine("Converting IME insertion offset into a DocumentSelection");
     final insertionSelection = _serializedDoc.imeToDocumentSelection(
       TextSelection.fromPosition(insertionPosition),
-    )!;
+    );
+    if (insertionSelection == null) {
+      editorImeLog.fine("insertionSelection is NULL, RETURN");
+      return;
+    }
+
     // FIXME: ClickUp is getting NPE's on this line ^ (from Sentry error reports)
 
     // Update the local IME value that changes with each delta.
