@@ -399,6 +399,13 @@ class TextDeltasDocumentEditor {
     // Update the local IME value that changes with each delta.
     _previousImeValue = delta.apply(_previousImeValue);
 
+    _serializedDoc = DocumentImeSerializer(
+      document,
+      selection.value!,
+      composingRegion.value,
+      _serializedDoc.didPrependPlaceholder ? PrependedCharacterPolicy.include : PrependedCharacterPolicy.exclude,
+    );
+    
     editorImeLog.fine("Deletion operation complete");
   }
 
@@ -424,12 +431,26 @@ class TextDeltasDocumentEditor {
           docSelection.isCollapsed ? SelectionChangeType.placeCaret : SelectionChangeType.expandSelection,
           SelectionReason.userInteraction,
         ),
-        ChangeComposingRegionRequest(docComposingRegion),
       ]);
     }
 
+    if (docComposingRegion != composingRegion.value) {
+      editor.execute([
+        ChangeComposingRegionRequest(
+          docComposingRegion,
+        ),
+      ]);
+    }
+    
     // Update the local IME value that changes with each delta.
     _previousImeValue = delta.apply(_previousImeValue);
+
+    _serializedDoc = DocumentImeSerializer(
+      document,
+      selection.value!,
+      composingRegion.value,
+      _serializedDoc.didPrependPlaceholder ? PrependedCharacterPolicy.include : PrependedCharacterPolicy.exclude,
+    );
   }
 
   /// Performs a workaround to select all text in the document on iOS when the user presses "Select all".
