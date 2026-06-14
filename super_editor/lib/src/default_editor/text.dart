@@ -485,7 +485,7 @@ class TextNodePosition extends TextPosition implements NodePosition {
   }
 
   @override
-  String toString() => "[TextNodePosition] - ${super.toString()}";
+  String toString() => "[TextNodePosition] - TextPosition(offset: $offset, affinity: $affinity)";
 
   @override
   bool operator ==(Object other) =>
