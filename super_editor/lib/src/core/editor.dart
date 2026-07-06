@@ -220,6 +220,8 @@ class Editor implements RequestDispatcher {
               ..add(_transaction!);
         }
       }
+
+      _future.clear();
     }
 
     // Now that an atomic set of changes have completed, let the reactions followup
