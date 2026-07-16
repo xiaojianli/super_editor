@@ -121,8 +121,8 @@ class SuperKeyboardPlugin: FlutterPlugin, ActivityAware, DefaultLifecycleObserve
 
   override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
     SuperKeyboardLog.v("super_keyboard", "Re-attaching to Activity for config changes")
-    startListeningToActivityLifecycle()
     this.binding = binding
+    startListeningToActivityLifecycle()
   }
 
   override fun onDetachedFromActivity() {
