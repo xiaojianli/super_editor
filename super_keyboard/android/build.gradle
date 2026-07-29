@@ -29,7 +29,7 @@ android {
         namespace = "com.flutterbountyhunters.superkeyboard.super_keyboard"
     }
 
-    compileSdk = 34
+    compileSdk = flutter.compileSdkVersion
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
